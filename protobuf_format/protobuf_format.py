@@ -1,4 +1,4 @@
-from protobuf_format.transaction_pb2 import Data, Transaction
+from protobuf_format.data_pb2 import Data, Transaction
 
 typeToProto = {
     "перевод": "transfer",
