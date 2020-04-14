@@ -21,16 +21,16 @@ serializeFunctions[SerializeTypes.pickle] = pickle.dumps
 
 def serializeBenchmark(iterations, serializeType, data):
     fn = serializeFunctions[serializeType]
-    totalTime = float(0)
+    result = []
     print("[{}] Start serialize bechmark".format(serializeType))
     for i in progressbar.progressbar(range(iterations)):
         start = time()
         serializedData = fn(data)
-        totalTime += time() - start
+        result.append(time() - start)
 
     Result.addSerializeBenchmark(
         serializeType,
-        totalTime / float(iterations),
+        result,
         len(serializedData)
     )
 

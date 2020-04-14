@@ -22,16 +22,16 @@ deserializeFunctions[SerializeTypes.pickle] = pickle.loads
 
 def deserializeBenchmark(iterations, serializeType, serializedData):
     fn = deserializeFunctions[serializeType]
-    totalTime = float(0)
+    result = []
     print("[{}] Start deserialize benchmark".format(serializeType))
     for i in progressbar.progressbar(range(iterations)):
         start = time()
         data = fn(serializedData)
-        totalTime += time() - start
+        result.append(time() - start)
 
     Result.addDeserializeBenchmark(
         serializeType,
-        totalTime / float(iterations)
+        result
     )
     with open(os.path.join(Result.RESULTS_DIR, "deserialized-{}.csv".format(serializeType)), "w") as fstream:
         fstream.write(csvSerialize(data))
